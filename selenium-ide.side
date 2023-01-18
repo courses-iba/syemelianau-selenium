@@ -1,0 +1,42 @@
+{
+  "id": "5ac32156-b2b8-4513-9f32-890ffca349e7",
+  "version": "2.0",
+  "name": "selenium-ide",
+  "url": "https://www.softwaretestinghelp.com/",
+  "tests": [{
+    "id": "62452d9c-f331-40ed-9ca4-0d55ca2f435f",
+    "name": "task7",
+    "commands": [{
+      "id": "d2c27c88-d591-45f7-909b-11b29e62c08b",
+      "comment": "",
+      "command": "open",
+      "target": "https://www.softwaretestinghelp.com/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55057a2d-7100-4910-8e26-3c68ec726609",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Home",
+      "targets": [
+        ["linkText=Home", "linkText"],
+        ["css=#site-navigation #mega-menu-item-654 > .mega-menu-link", "css:finder"],
+        ["xpath=(//a[contains(text(),'Home')])[2]", "xpath:link"],
+        ["xpath=(//li[@id='mega-menu-item-654']/a)[2]", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, 'https://www.softwaretestinghelp.com/')])[90]", "xpath:href"],
+        ["xpath=//nav[2]/div/div/ul/li/a", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "ca109db7-e63e-4e6f-9ba3-42b47ff0f77c",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": [],
+  "plugins": []
+}
