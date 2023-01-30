@@ -47,9 +47,9 @@ public class WildberriesTest {
             assertFalse(wildberries.menuItemsElement.isDisplayed());
 
             WebElement checkbox = driver.findElement(By.cssSelector(Wildberries.checkbox_selector));
-            assertFalse(Tools.checkboxIsActive(checkbox));
+            assertFalse(Tools.containsClass(checkbox, Wildberries.cb_active_cls));
             checkbox.click();
-            assertTrue(Tools.checkboxIsActive(checkbox));
+            assertTrue(Tools.containsClass(checkbox, Wildberries.cb_active_cls));
         } catch (InvalidSelectorException e) {
             System.out.println("Selector is incorrect or syntactically invalid\n" + e);
             throw e;
