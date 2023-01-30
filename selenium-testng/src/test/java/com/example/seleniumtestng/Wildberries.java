@@ -13,6 +13,7 @@ public class Wildberries {
     public static String checkbox_selector = "div[class='subject-filter-item__likecheckbox']";
     public static String cb_active_cls = "is-active";
     public static String search_str = "ковер";
+    public static String search_placeholder = "Я ищу...";
     public static String cart_str = "Корзина";
 
     @FindBy(xpath = "//button[@class='header__hamburger' and @data-place='ariaLabel']")

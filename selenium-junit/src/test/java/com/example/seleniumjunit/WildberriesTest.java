@@ -9,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Arrays;
 
 public class WildberriesTest {
     private static WebDriver driver;
@@ -45,20 +44,12 @@ public class WildberriesTest {
 
             wildberries.listElement.click();
             wildberries.sublistElement.click();
-
             assertFalse(wildberries.menuItemsElement.isDisplayed());
 
             WebElement checkbox = driver.findElement(By.cssSelector(Wildberries.checkbox_selector));
-
-            String[] classes = checkbox.getAttribute("class").split(" ");
-            boolean result = Arrays.asList(classes).contains(Wildberries.cb_active_cls);
-            assertFalse(result);
-
+            assertFalse(Tools.checkboxIsActive(checkbox));
             checkbox.click();
-
-            classes = checkbox.getAttribute("class").split(" ");
-            result = Arrays.asList(classes).contains(Wildberries.cb_active_cls);
-            assertTrue(result);
+            assertTrue(Tools.checkboxIsActive(checkbox));
         } catch (InvalidSelectorException e) {
             System.out.println("Selector is incorrect or syntactically invalid\n" + e);
             throw e;
@@ -72,18 +63,18 @@ public class WildberriesTest {
     @Order(1)
     public void searchAndAddToCart() {
         try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
             assertTrue(wildberries.search.isDisplayed());
+            wait.until(ExpectedConditions.attributeToBe(wildberries.search, "placeholder", Wildberries.search_placeholder));
             wildberries.search.sendKeys(Wildberries.search_str);
             wildberries.search.sendKeys(Keys.ENTER);
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             wait.until(ExpectedConditions.titleIs(Wildberries.search_str));
-
             assertTrue(wildberries.addToCartBtn.isDisplayed());
             assertFalse(wildberries.cartBadge.isDisplayed());
 
             wildberries.addToCartBtn.click();
-
             assertTrue(wildberries.cartBadge.isDisplayed());
         } catch (InvalidSelectorException e) {
             System.out.println("Selector is incorrect or syntactically invalid\n" + e);
