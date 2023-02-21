@@ -13,33 +13,46 @@ import java.io.IOException;
 import static org.testng.Assert.*;
 
 public class WriteIntoExcel {
-    private final String current_dir = System.getProperty("user.dir");
-    private final String file_path = current_dir + "\\users.xlsx";
-    private final String template_path = current_dir + "\\users_template.xlsx";
-    private final int firstRow = 1;
+    private final String CURRENT_DIR = System.getProperty("user.dir");
+    private final String FILE_PATH = CURRENT_DIR + "\\users.xlsx";
+    private final String TEMPLATE_PATH = CURRENT_DIR + "\\users_template.xlsx";
+    private final int START_ROW = 1;
+
+    private FileInputStream fs;
+    private FileOutputStream fos;
     private Workbook wb;
 
-    public final String test_first_name = "Ivan", test_middle_name = "Ivanovich", test_surname = "Ivanov";
+    public final String FIRST_NAME = "Ivan", MIDDLE_NAME = "Ivanovich", LAST_NAME = "Ivanov";
+    public final int FIRST_NAME_COLUMN = 0, MIDDLE_NAME_COLUMN = 1, LAST_NAME_COLUMN = 2;
 
     public void setTemplateData() throws IOException {
-        FileInputStream fs = new FileInputStream(template_path);
-        Workbook wb = new XSSFWorkbook(fs);
-        FileOutputStream fos = new FileOutputStream(file_path);
+        fs = new FileInputStream(TEMPLATE_PATH);
+        wb = new XSSFWorkbook(fs);
+
+        fos = new FileOutputStream(FILE_PATH);
         wb.write(fos);
         fos.close();
+
+        closeFile();
     }
 
-    private Workbook openFile() throws IOException {
-        FileInputStream fs = new FileInputStream(file_path);
-        return new XSSFWorkbook(fs);
+    private void openFile() throws IOException {
+        fs = new FileInputStream(FILE_PATH);
+        wb = new XSSFWorkbook(fs);
+    }
+
+    private void closeFile() throws IOException {
+        wb.close();
+        fs.close();
     }
 
     public void changeColumnValue(int column, String value) throws IOException {
-        wb = openFile();
+        openFile();
+
         Sheet sheet = wb.getSheetAt(0);
         int lastRow = sheet.getLastRowNum();
 
-        for (int i = firstRow; i <= lastRow; ++i) {
+        for (int i = START_ROW; i <= lastRow; ++i) {
             Row row = sheet.getRow(i);
             System.out.println(row.getCell(column));
             Cell cell = row.createCell(column);
@@ -48,30 +61,38 @@ public class WriteIntoExcel {
             System.out.println(row.getCell(column));
         }
 
-        FileOutputStream fos = new FileOutputStream(file_path);
+        fos = new FileOutputStream(FILE_PATH);
         wb.write(fos);
         fos.close();
+
+        closeFile();
     }
 
     public void assertEqualFalse(int column, String test_data) throws IOException {
-        wb = openFile();
+        openFile();
+
         Sheet sheet = wb.getSheetAt(0);
         int lastRow = sheet.getLastRowNum();
 
-        for (int i = firstRow; i <= lastRow; ++i) {
+        for (int i = START_ROW; i <= lastRow; ++i) {
             Row row = sheet.getRow(i);
             assertNotEquals(test_data, row.getCell(column).toString());
         }
+
+        closeFile();
     }
 
     public void assertEqualTrue(int column, String test_data) throws IOException {
-        wb = openFile();
+        openFile();
+
         Sheet sheet = wb.getSheetAt(0);
         int lastRow = sheet.getLastRowNum();
 
-        for (int i = firstRow; i <= lastRow; ++i) {
+        for (int i = START_ROW; i <= lastRow; ++i) {
             Row row = sheet.getRow(i);
             assertEquals(test_data, row.getCell(column).toString());
         }
+
+        closeFile();
     }
 }

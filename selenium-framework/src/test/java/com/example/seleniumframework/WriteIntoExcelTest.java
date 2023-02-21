@@ -15,22 +15,22 @@ public class WriteIntoExcelTest {
 
     @Test
     public void updateFirstName() throws IOException {
-        excel.assertEqualFalse(0, excel.test_first_name);
-        excel.changeColumnValue(0, excel.test_first_name);
-        excel.assertEqualTrue(0, excel.test_first_name);
+        excel.assertEqualFalse(excel.FIRST_NAME_COLUMN, excel.FIRST_NAME);
+        excel.changeColumnValue(excel.FIRST_NAME_COLUMN, excel.FIRST_NAME);
+        excel.assertEqualTrue(excel.FIRST_NAME_COLUMN, excel.FIRST_NAME);
     }
 
     @Test
     public void updateMiddleName() throws IOException {
-        excel.assertEqualFalse(1, excel.test_middle_name);
-        excel.changeColumnValue(1, excel.test_middle_name);
-        excel.assertEqualTrue(1, excel.test_middle_name);
+        excel.assertEqualFalse(excel.MIDDLE_NAME_COLUMN, excel.MIDDLE_NAME);
+        excel.changeColumnValue(excel.MIDDLE_NAME_COLUMN, excel.MIDDLE_NAME);
+        excel.assertEqualTrue(excel.MIDDLE_NAME_COLUMN, excel.MIDDLE_NAME);
     }
 
     @Test
     public void updateSurname() throws IOException {
-        excel.assertEqualFalse(2, excel.test_surname);
-        excel.changeColumnValue(2, excel.test_surname);
-        excel.assertEqualTrue(2, excel.test_surname);
+        excel.assertEqualFalse(excel.LAST_NAME_COLUMN, excel.LAST_NAME);
+        excel.changeColumnValue(excel.LAST_NAME_COLUMN, excel.LAST_NAME);
+        excel.assertEqualTrue(excel.LAST_NAME_COLUMN, excel.LAST_NAME);
     }
 }
